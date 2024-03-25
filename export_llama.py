@@ -28,6 +28,7 @@ def export_lm_head(lm_head_model, config, dtype, args, model_name):
         dynamic_axes={
             'input': {1: 'N'}
         },
+        export_params=args.export_params,
     )
 
 
@@ -53,6 +54,7 @@ def export_norm(norm_model, config, dtype, args, model_name):
         dynamic_axes={
             'input': {1: 'N'}
         },
+        export_params=args.export_params,
     )
 
 
@@ -77,6 +79,7 @@ def export_embeding(embed_model, config, args, model_name):
         dynamic_axes={
             'input': {1: 'N'}
         },
+        export_params=args.export_params,
     )
 
 
@@ -226,6 +229,7 @@ def export_decoders(decoder_layers, config, dtype, args, model_name):
         input_names=in_names,
         output_names=out_names,
         dynamic_axes=dynamic_axes,
+        export_params=args.export_params,
     )
 
 
@@ -315,6 +319,7 @@ if __name__ == "__main__":
     parser.add_argument('--kv_cache_format', required=False, type=int, default=0)
     # default model_type is llama_hf, other model_type such as Qwen, Baichuan ban be supported
     parser.add_argument('--model_type', required=False, type=str, default="")
+    parser.add_argument('--export_params', action='store_true')
 
     args = parser.parse_args()
 
